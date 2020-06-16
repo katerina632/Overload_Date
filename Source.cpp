@@ -53,7 +53,7 @@ int main() {
 
 	d5(3);
 	d5.Print();
-	d5(3, 15);
+	d5(3, 25);
 	d5.Print();
 
 	system("pause");

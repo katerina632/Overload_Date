@@ -5,22 +5,28 @@ using namespace std;
 int Date::DaysInMonth[12] = { 31,28,31,30,31,30,31,31,30,31,30,31 };
 
 void Date::IsCorrectDatePlus()
-{
-	LeapYear(year);	
-	if (day> DaysInMonth[month - 1]) {
-		day-= DaysInMonth[month - 1];
-		month++;
+{	if (month > 12) {
+		year += month / 12;
+		month %= 12;
 	}
-	if (month > 12) {
-		month-=12;
-		year+=1+month/12;
+
+	LeapYear(year);
+	while (day / DaysInMonth[month - 1]) {
+		if (day - DaysInMonth[month - 1] > 0) {
+			day -= DaysInMonth[month - 1];
+			++month;
+			if (month > 12) {
+				month = 1;
+				++year;
+				LeapYear(year);
+			}
+		}
+		else
+			break;
 	}
-	if (year > 9999) {
-		year = 1;
-	}		
-	
+
 	if (DaysInMonth[1] == 29)
-		DaysInMonth[1] = 28;	
+		DaysInMonth[1] = 28;		
 }
 
 void Date::IsCorrectDateMinus()
